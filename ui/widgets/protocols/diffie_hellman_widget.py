@@ -24,7 +24,7 @@ from qfluentwidgets import (
     InfoBar, MessageBox, FluentIcon as FIF
 )
 
-import random
+import secrets
 from Crypto.Util import number
 
 
@@ -37,15 +37,46 @@ def str_add_space(out_str: str) -> str:
     return add_space_str.strip()
 
 
-def find_primitive_root(p):
-    """找到素数p的本原根"""
-    # 简化版本：随机选择一个小的本原根
-    # 对于大素数，完整的本原根查找比较复杂
-    for a in range(2, min(100, p)):
-        # 检查a是否是本原根（简化检查）
-        if pow(a, (p-1)//2, p) != 1:
+def _factorize(n):
+    """返回 n 的所有素因子集合（试除法）"""
+    factors = set()
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors.add(d)
+            n //= d
+        d += 1
+    if n > 1:
+        factors.add(n)
+    return factors
+
+
+def find_primitive_root(p, prime_factors_of_p_minus_1=None):
+    """找到素数p的本原根
+
+    验证方法：对于 p-1 的每个素因子 q，检查 a^((p-1)/q) mod p != 1。
+    如果对所有素因子都满足此条件，则 a 是 p 的本原根。
+
+    Args:
+        p: 素数
+        prime_factors_of_p_minus_1: p-1 的素因子集合（可选，用于避免重复分解）
+    """
+    if p == 2:
+        return 1
+
+    phi = p - 1
+    if prime_factors_of_p_minus_1 is None:
+        prime_factors_of_p_minus_1 = _factorize(phi)
+
+    for a in range(2, p):
+        is_primitive = True
+        for q in prime_factors_of_p_minus_1:
+            if pow(a, phi // q, p) == 1:
+                is_primitive = False
+                break
+        if is_primitive:
             return a
-    return 2  # 默认返回2
+    return 2  # 理论上对于素数 p > 2 不会到达这里
 
 
 class ParamsGenThread(QThread):
@@ -58,11 +89,18 @@ class ParamsGenThread(QThread):
     
     def run(self):
         try:
-            # 生成素数p（key_bytes字节）
-            p = number.getPrime(self.key_bytes * 8)
+            # 生成安全素数 p = 2q + 1，其中 q 也是素数
+            # 安全素数的优点：p-1 = 2q 只有两个素因子 {2, q}，
+            # 可以高效地验证本原根，且能抵抗小子群攻击
+            bits = self.key_bytes * 8
+            while True:
+                q = number.getPrime(bits - 1)
+                p = 2 * q + 1
+                if number.isPrime(p):
+                    break
             
-            # 找到本原根a
-            a = find_primitive_root(p)
+            # 找到本原根a（对于安全素数，p-1 的素因子为 {2, q}）
+            a = find_primitive_root(p, prime_factors_of_p_minus_1={2, q})
             
             self.finished.emit(p, a)
         except Exception as e:
@@ -443,8 +481,8 @@ class DiffieHellmanWidget(ScrollArea):
             
             key_length = int(self.keyLengthEdit.text())
             
-            # 生成 Alice 私钥
-            self.alice_private = random.randint(2, self.prime_p - 2)
+            # 生成 Alice 私钥（使用密码学安全随机数）
+            self.alice_private = secrets.randbelow(self.prime_p - 3) + 2
             
             # 格式化私钥
             xa_hex = hex(self.alice_private)[2:].upper().zfill(key_length * 2)
@@ -491,8 +529,8 @@ class DiffieHellmanWidget(ScrollArea):
             
             key_length = int(self.keyLengthEdit.text())
             
-            # 生成 Bob 私钥
-            self.bob_private = random.randint(2, self.prime_p - 2)
+            # 生成 Bob 私钥（使用密码学安全随机数）
+            self.bob_private = secrets.randbelow(self.prime_p - 3) + 2
             
             # 格式化私钥
             xb_hex = hex(self.bob_private)[2:].upper().zfill(key_length * 2)
