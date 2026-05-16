@@ -45,6 +45,11 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
+      - name: Run unit tests
+        run: |
+          export PYTHONPATH="${GITHUB_WORKSPACE}:${PYTHONPATH}"
+          pytest tests/unit/ -v
+
   build-check:
     name: Build Check
     runs-on: ubuntu-latest
