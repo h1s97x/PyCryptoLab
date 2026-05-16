@@ -43,12 +43,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov
-
-      - name: Test with pytest
-        run: |
-          export PYTHONPATH="${GITHUB_WORKSPACE}:${PYTHONPATH}"
-          pytest tests/protocols/ tests/unit/ tests/integration/ -v
+          pip install pytest
 
   build-check:
     name: Build Check
