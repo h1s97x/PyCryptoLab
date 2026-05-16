@@ -18,6 +18,9 @@ hiddenimports = [
     'Crypto',
     'gmpy2',
     'ecdsa',
+    'gmssl',
+    'gmssl.sm2',
+    'gmssl.func',
     # 所有算法模块
     'core.algorithms.classical',
     'core.algorithms.symmetric',
@@ -29,6 +32,11 @@ hiddenimports = [
     'ui.interfaces',
     'ui.widgets',
     'ui.widgets.protocols',
+    'ui.widgets.seal_widget',
+    'ui.widgets.zuc_widget',
+    'ui.widgets.crypto1_widget',
+    'ui.widgets.ecc_widget',
+    'ui.widgets.sm2_widget',
 ]
 
 a = Analysis(
