@@ -123,9 +123,16 @@ Cryptography/
 ├── CryptographicProtocol/  # 密码协议
 ├── resources/              # 资源文件
 ├── docs/                   # 文档
-│   ├── guides/            # 使用指南
-│   ├── phases/            # 开发阶段文档
-│   └── DEVELOPMENT_PROGRESS.md  # 开发进度
+│   ├── ARCHITECTURE.md     # 架构设计
+│   ├── ROADMAP.md         # 项目路线图
+│   ├── GITHUB_RELEASE_GUIDE.md
+│   ├── build-guide.md     # 构建指南
+│   ├── user-guide.md      # 用户指南
+│   ├── README.md          # 文档目录
+│   └── archive/           # 历史文档归档
+│       ├── legacy/        # 过时的项目文档
+│       ├── guides/        # 旧版开发指南
+│       └── reports/       # 历史报告
 ├── test_algorithms.py      # 自动化测试脚本
 ├── main.py                 # 程序入口
 └── requirements.txt        # 依赖列表
@@ -155,12 +162,10 @@ pytest tests/unit/ --cov=core --cov-report=html
 
 - [CHANGELOG](CHANGELOG.md) - 版本更新记录
 - [贡献指南](CONTRIBUTING.md) - 如何参与项目贡献
-- [开发进度](docs/DEVELOPMENT_PROGRESS.md) - 详细的开发进度和算法列表
-- [UI 使用指南](docs/UI_GUIDE.md) - 界面使用说明
-- [快速开始](docs/guides/QUICK_START.md) - 快速上手指南
-- [开发指南](docs/guides/DEVELOPMENT_GUIDE.md) - 开发者文档
-- [QFluentWidgets 快速入门](docs/guides/QFLUENTWIDGETS_QUICK_START.md) - UI框架文档
+- [用户指南](docs/user-guide.md) - 界面使用说明
+- [构建指南](docs/build-guide.md) - 项目构建说明
 - [架构说明](docs/ARCHITECTURE.md) - 系统架构设计
+- [归档文档](docs/archive/README.md) - 历史文档存档
 
 ## 🔄 版本历史
 
