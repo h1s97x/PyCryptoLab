@@ -1,0 +1,149 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  release:
+    name: Build Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            artifact_name: 'PyCryptoLab-Windows'
+            build_cmd: 'pyinstaller build_config.spec --noconfirm'
+          - os: ubuntu-latest
+            artifact_name: 'PyCryptoLab-Linux'
+            build_cmd: 'pip install -r requirements.txt && pyinstaller build_config.spec --noconfirm'
+          - os: macos-latest
+            artifact_name: 'PyCryptoLab-macOS'
+            build_cmd: 'pip install -r requirements.txt && pyinstaller build_config.spec --noconfirm'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Linux dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgmp-dev \
+            libmpfr-dev \
+            libmpc-dev \
+            libgl1-mesa-glx \
+            libegl1 \
+            libxkbcommon0 \
+            libxcb-cursor0 \
+            libxcb-icccm4 \
+            libxcb-image0 \
+            libxcb-keysyms1 \
+            libxcb-randr0 \
+            libxcb-render-util0 \
+            libxcb-shape0 \
+            x11-utils \
+            libxcb-xinerama0 \
+            libxcb-xfixes0
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Update build_config.spec with new widgets
+        run: |
+          python -c "
+          import re
+          with open('build_config.spec', 'r') as f:
+              content = f.read()
+          
+          # Add new widget imports if not present
+          new_imports = [
+              'ui.widgets.seal_widget',
+              'ui.widgets.zuc_widget',
+              'ui.widgets.crypto1_widget',
+              'ui.widgets.ecc_widget',
+              'ui.widgets.sm2_widget',
+              'gmssl',
+              'gmssl.sm2',
+              'gmssl.func',
+          ]
+          
+          for imp in new_imports:
+              if f\"'{imp}'\" not in content:
+                  content = content.replace(
+                      \"'ui.widgets.protocols',\",
+                      f\"'{imp}',\\n    'ui.widgets.protocols',\"
+                  )
+          
+          with open('build_config.spec', 'w') as f:
+              f.write(content)
+          print('build_config.spec updated')
+          "
+
+      - name: Build application
+        run: ${{ matrix.build_cmd }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: dist/密码学平台/
+          retention-days: 30
+
+  create-release:
+    name: Create GitHub Release
+    needs: release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts/
+
+      - name: Create zip archives
+        run: |
+          cd artifacts
+          for dir in */; do
+            name="${dir%/}"
+            zip -r "${name}.zip" "$dir"
+          done
+          ls -la
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            artifacts/**/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
