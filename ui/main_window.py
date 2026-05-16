@@ -136,7 +136,9 @@ class FluentMainWindow(FluentWindow):
                 {'icon': FIF.CERTIFICATE, 'name': 'RSA', 'description': '最常用的公钥加密算法', 'objectName': 'rsaWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'RSA Sign', 'description': 'RSA数字签名', 'objectName': 'rsaSignWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'ElGamal', 'description': '基于离散对数的公钥密码', 'objectName': 'elgamalWidget'},
+                {'icon': FIF.CERTIFICATE, 'name': 'ECC', 'description': '椭圆曲线密码学（P-256曲线）', 'objectName': 'eccWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'ECDSA', 'description': '椭圆曲线数字签名算法', 'objectName': 'ecdsaWidget'},
+                {'icon': FIF.CERTIFICATE, 'name': 'SM2', 'description': '国密椭圆曲线公钥密码算法', 'objectName': 'sm2Widget'},
             ],
             self
         )
@@ -241,7 +243,9 @@ class FluentMainWindow(FluentWindow):
             'rsaWidget': ('ui.widgets.rsa_widget', 'RSAWidget'),
             'rsaSignWidget': ('ui.widgets.rsa_sign_widget', 'RSASignWidget'),
             'elgamalWidget': ('ui.widgets.elgamal_widget', 'ElGamalWidget'),
+            'eccWidget': ('ui.widgets.ecc_widget', 'ECCWidget'),
             'ecdsaWidget': ('ui.widgets.ecdsa_widget', 'ECDSAWidget'),
+            'sm2Widget': ('ui.widgets.sm2_widget', 'SM2Widget'),
             
             # 哈希算法
             'md5Widget': ('ui.widgets.md5_widget', 'MD5Widget'),
