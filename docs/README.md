@@ -6,33 +6,33 @@
 
 ### 核心文档
 
-- `ARCHITECTURE.md` - 项目架构设计
-- `CHANGELOG.md` - 版本更新日志
-- `ROADMAP.md` - 项目路线图
+| 文件 | 说明 |
+|------|------|
+| `ARCHITECTURE.md` | 项目架构设计 |
+| `ROADMAP.md` | 项目路线图 |
+| `GITHUB_RELEASE_GUIDE.md` | GitHub Release 使用指南 |
 
-### 功能文档
+### 使用文档
 
-- `HTML_INTEGRATION.md` - HTML算法介绍页面集成方案
-- `HTML_INTEGRATION_SUMMARY.md` - HTML集成完成总结
-- `PROTOCOL_REFACTOR_PLAN.md` - 密码协议重构计划
-- `PROTOCOL_REFACTOR_COMPLETE.md` - 密码协议重构完成总结
+| 文件 | 说明 |
+|------|------|
+| `user-guide.md` | 用户指南，包含所有算法说明 |
+| `build-guide.md` | 项目构建指南 |
+| `README.md` | 本文档 |
 
-### 开发指南
+### 历史归档
 
-`guides/` 目录包含开发和使用指南：
-- `ADD_INTRO_BUTTON.md` - 添加HTML介绍按钮快速指南
-- `DEVELOPMENT_GUIDE.md` - 开发指南
-- `QFLUENTWIDGETS_QUICK_START.md` - QFluentWidgets快速入门
-- `QUICK_START.md` - 项目快速开始
-- `UI_COMPONENT_GUIDE.md` - UI组件使用指南
-- `quick_fixes.md` - 常见问题快速修复
+| 目录 | 说明 |
+|------|------|
+| `archive/legacy/` | 过时的项目文档 |
+| `archive/guides/` | 旧版开发指南 |
+| `archive/reports/` | 历史报告 |
 
-### 实验报告
-
-`reports/` 目录包含实验报告模板和示例。
+详细归档说明请查看 [archive/README.md](archive/README.md)。
 
 ## 文档维护
 
 - 保持文档更新与代码同步
-- 使用Markdown格式
+- 使用 Markdown 格式
 - 遵循统一的文档风格
+- 过时文档移至 `archive/` 而非直接删除

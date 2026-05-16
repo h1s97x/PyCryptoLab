@@ -43,7 +43,7 @@ python main.py --theme light
 python main.py --theme dark
 ```
 
-## 📚 支持的算法 (28/37)
+## 📚 支持的算法 (33/37)
 
 ### 经典密码 (7/7) ✅
 - ✅ Hill 密码 - 矩阵加密
@@ -54,7 +54,7 @@ python main.py --theme dark
 - ✅ Monoalphabetic 密码 - 单表替换
 - ✅ Frequency Analysis - 频率分析
 
-### 对称密码 (8/10)
+### 对称密码 (10/10) ✅
 - ✅ AES - 高级加密标准
 - ✅ DES - 数据加密标准
 - ✅ SM4 - 国密分组密码
@@ -62,18 +62,18 @@ python main.py --theme dark
 - ✅ SPECK - NSA轻量级密码
 - ✅ SIMON - NSA轻量级密码
 - ✅ Block Mode - ECB/CBC模式
-- 🚧 SEAL - 流密码
-- 🚧 ZUC - 祖冲之算法
-- 🚧 Crypto-1 - RFID加密
+- ✅ SEAL - 伪随机生成算法
+- ✅ ZUC - 祖冲之流密码
+- ✅ Crypto-1 - RFID加密
 
-### 公钥密码 (4/7)
+### 公钥密码 (7/7) ✅
 - ✅ RSA - 公钥加密
 - ✅ RSA Sign - RSA数字签名
 - ✅ ElGamal - 公钥加密
 - ✅ ECDSA - 椭圆曲线数字签名
-- 🚧 ECC - 椭圆曲线加密
-- 🚧 SM2 - 国密公钥密码
-- 🚧 SM2 Sign - 国密数字签名
+- ✅ ECC - 椭圆曲线加密
+- ✅ SM2 - 国密公钥密码
+- ✅ SM2 Sign - 国密数字签名
 
 ### 哈希算法 (7/8)
 - ✅ MD5 - 消息摘要算法
@@ -90,7 +90,7 @@ python main.py --theme dark
 - ✅ CRT - 中国剩余定理
 - ✅ Euclidean - 欧几里得算法
 
-**完成度**: 28/37 (75.7%)
+**完成度**: 33/37 (89.2%)
 
 ✅ 已完成 | 🚧 开发中
 
@@ -123,9 +123,16 @@ Cryptography/
 ├── CryptographicProtocol/  # 密码协议
 ├── resources/              # 资源文件
 ├── docs/                   # 文档
-│   ├── guides/            # 使用指南
-│   ├── phases/            # 开发阶段文档
-│   └── DEVELOPMENT_PROGRESS.md  # 开发进度
+│   ├── ARCHITECTURE.md     # 架构设计
+│   ├── ROADMAP.md         # 项目路线图
+│   ├── GITHUB_RELEASE_GUIDE.md
+│   ├── build-guide.md     # 构建指南
+│   ├── user-guide.md      # 用户指南
+│   ├── README.md          # 文档目录
+│   └── archive/           # 历史文档归档
+│       ├── legacy/        # 过时的项目文档
+│       ├── guides/        # 旧版开发指南
+│       └── reports/       # 历史报告
 ├── test_algorithms.py      # 自动化测试脚本
 ├── main.py                 # 程序入口
 └── requirements.txt        # 依赖列表
@@ -133,34 +140,43 @@ Cryptography/
 
 ## 🧪 测试
 
-运行自动化测试脚本：
+运行单元测试：
 
 ```bash
-python test_algorithms.py
+# 安装测试依赖
+pip install pytest pytest-cov flake8 gmssl
+
+# 运行所有测试
+pytest tests/unit/ -v
+
+# 运行并生成覆盖率报告
+pytest tests/unit/ --cov=core --cov-report=html
 ```
 
 测试内容包括：
-- ✅ 所有Widget导入测试
-- ✅ 核心算法可用性测试
-- ✅ 主窗口创建测试
+- ✅ 33 个算法 Widget 导入测试
+- ✅ 77 个单元测试用例
+- ✅ 核心算法功能测试
 
 ## 📖 文档
 
-- [开发进度](docs/DEVELOPMENT_PROGRESS.md) - 详细的开发进度和算法列表
-- [UI 使用指南](docs/UI_GUIDE.md) - 界面使用说明
-- [快速开始](docs/guides/QUICK_START.md) - 快速上手指南
-- [开发指南](docs/guides/DEVELOPMENT_GUIDE.md) - 开发者文档
-- [QFluentWidgets 快速入门](docs/guides/QFLUENTWIDGETS_QUICK_START.md) - UI框架文档
+- [CHANGELOG](CHANGELOG.md) - 版本更新记录
+- [贡献指南](CONTRIBUTING.md) - 如何参与项目贡献
+- [用户指南](docs/user-guide.md) - 界面使用说明
+- [构建指南](docs/build-guide.md) - 项目构建说明
 - [架构说明](docs/ARCHITECTURE.md) - 系统架构设计
+- [归档文档](docs/archive/README.md) - 历史文档存档
 
 ## 🔄 版本历史
 
 ### v2.0 - Fluent UI (当前版本)
-- 全新 Fluent Design 界面
-- 28个算法完整实现
-- 深色/浅色主题支持
-- 现代化卡片式布局
-- 实时日志和操作反馈
+- ✅ 33 个算法完整实现 (89.2%)
+- ✅ 77 个单元测试用例
+- ✅ GitHub Actions CI/CD 流水线
+- ✅ 全新 Fluent Design 界面
+- ✅ 深色/浅色主题支持
+- ✅ 多平台打包支持 (Windows/macOS/Linux)
+- ✅ 详细的贡献指南和文档
 
 ### v1.0 - Classic UI
 - 经典界面设计
@@ -187,23 +203,7 @@ python main.py
 
 欢迎提交 Issue 和 Pull Request！
 
-### 贡献指南
-
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'feat: Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
-### 提交规范
-
-- `feat`: 新功能
-- `fix`: 修复bug
-- `docs`: 文档更新
-- `style`: 代码格式调整
-- `refactor`: 代码重构
-- `test`: 测试相关
-- `chore`: 构建/工具相关
+请参阅 [贡献指南](CONTRIBUTING.md) 了解详细的开发流程和代码规范。
 
 ## 📄 许可证
 
