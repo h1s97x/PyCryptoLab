@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryptography-platform"
+version = "1.0.0"
+description = "密码学平台 - Fluent UI"
+requires-python = ">=3.8"
+dependencies = [
+    "PyQt5>=5.15.0",
+    "PyQt-Fluent-Widgets>=1.5.0",
+    "PyQtWebEngine>=5.15.0",
+    "cryptography>=41.0.0",
+    "pycryptodome>=3.19.0",
+    "gmpy2>=2.1.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "flake8>=6.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["core", "ui", "infrastructure"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[tool.flake8]
+max-line-length = 127
+max-complexity = 10
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+    "venv",
+]
+ignore = ["E203", "W503"]
