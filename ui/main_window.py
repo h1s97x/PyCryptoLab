@@ -121,6 +121,9 @@ class FluentMainWindow(FluentWindow):
                 {'icon': FIF.FINGERPRINT, 'name': 'SPECK', 'description': 'NSA轻量级分组密码', 'objectName': 'speckWidget'},
                 {'icon': FIF.FINGERPRINT, 'name': 'SIMON', 'description': 'NSA轻量级分组密码', 'objectName': 'simonWidget'},
                 {'icon': FIF.FINGERPRINT, 'name': 'Block Mode', 'description': 'ECB和CBC分组模式', 'objectName': 'blockModeWidget'},
+                {'icon': FIF.FINGERPRINT, 'name': 'SEAL', 'description': 'IBM伪随机生成算法', 'objectName': 'sealWidget'},
+                {'icon': FIF.FINGERPRINT, 'name': 'ZUC', 'description': '国密流密码算法（LTE标准）', 'objectName': 'zucWidget'},
+                {'icon': FIF.FINGERPRINT, 'name': 'Crypto-1', 'description': 'MIFARE RFID加密算法', 'objectName': 'crypto1Widget'},
             ],
             self
         )
@@ -133,7 +136,9 @@ class FluentMainWindow(FluentWindow):
                 {'icon': FIF.CERTIFICATE, 'name': 'RSA', 'description': '最常用的公钥加密算法', 'objectName': 'rsaWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'RSA Sign', 'description': 'RSA数字签名', 'objectName': 'rsaSignWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'ElGamal', 'description': '基于离散对数的公钥密码', 'objectName': 'elgamalWidget'},
+                {'icon': FIF.CERTIFICATE, 'name': 'ECC', 'description': '椭圆曲线密码学（P-256曲线）', 'objectName': 'eccWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'ECDSA', 'description': '椭圆曲线数字签名算法', 'objectName': 'ecdsaWidget'},
+                {'icon': FIF.CERTIFICATE, 'name': 'SM2', 'description': '国密椭圆曲线公钥密码算法', 'objectName': 'sm2Widget'},
             ],
             self
         )
@@ -230,12 +235,17 @@ class FluentMainWindow(FluentWindow):
             'speckWidget': ('ui.widgets.speck_widget', 'SPECKWidget'),
             'simonWidget': ('ui.widgets.simon_widget', 'SIMONWidget'),
             'blockModeWidget': ('ui.widgets.block_mode_widget', 'BlockModeWidget'),
+            'sealWidget': ('ui.widgets.seal_widget', 'SEALWidget'),
+            'zucWidget': ('ui.widgets.zuc_widget', 'ZUCWidget'),
+            'crypto1Widget': ('ui.widgets.crypto1_widget', 'Crypto1Widget'),
             
             # 公钥密码
             'rsaWidget': ('ui.widgets.rsa_widget', 'RSAWidget'),
             'rsaSignWidget': ('ui.widgets.rsa_sign_widget', 'RSASignWidget'),
             'elgamalWidget': ('ui.widgets.elgamal_widget', 'ElGamalWidget'),
+            'eccWidget': ('ui.widgets.ecc_widget', 'ECCWidget'),
             'ecdsaWidget': ('ui.widgets.ecdsa_widget', 'ECDSAWidget'),
+            'sm2Widget': ('ui.widgets.sm2_widget', 'SM2Widget'),
             
             # 哈希算法
             'md5Widget': ('ui.widgets.md5_widget', 'MD5Widget'),
