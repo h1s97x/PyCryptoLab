@@ -49,7 +49,7 @@ jobs:
       - name: Run unit tests with coverage
         run: |
           export PYTHONPATH="${GITHUB_WORKSPACE}:${PYTHONPATH}"
-          pytest tests/unit/ -v --cov=core --cov=infrastructure --cov-report=term-missing --cov-fail-under=5
+          pytest tests/unit/ -v --cov=core --cov=infrastructure --cov-report=term-missing --cov-fail-under=15
 
   build-check:
     name: Build Check
