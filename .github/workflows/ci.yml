@@ -44,12 +44,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install gmssl
-          pip install pytest gmssl
+          pip install pytest pytest-cov gmssl
 
-      - name: Run unit tests
+      - name: Run unit tests with coverage
         run: |
           export PYTHONPATH="${GITHUB_WORKSPACE}:${PYTHONPATH}"
-          pytest tests/unit/ -v
+          pytest tests/unit/ -v --cov=core --cov=infrastructure --cov-report=term-missing --cov-fail-under=5
 
   build-check:
     name: Build Check
