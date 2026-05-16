@@ -139,6 +139,7 @@ class FluentMainWindow(FluentWindow):
                 {'icon': FIF.CERTIFICATE, 'name': 'ECC', 'description': '椭圆曲线密码学（P-256曲线）', 'objectName': 'eccWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'ECDSA', 'description': '椭圆曲线数字签名算法', 'objectName': 'ecdsaWidget'},
                 {'icon': FIF.CERTIFICATE, 'name': 'SM2', 'description': '国密椭圆曲线公钥密码算法', 'objectName': 'sm2Widget'},
+                {'icon': FIF.CERTIFICATE, 'name': 'SM2 Sign', 'description': 'SM2数字签名算法', 'objectName': 'sm2SignWidget'},
             ],
             self
         )
@@ -246,6 +247,7 @@ class FluentMainWindow(FluentWindow):
             'eccWidget': ('ui.widgets.ecc_widget', 'ECCWidget'),
             'ecdsaWidget': ('ui.widgets.ecdsa_widget', 'ECDSAWidget'),
             'sm2Widget': ('ui.widgets.sm2_widget', 'SM2Widget'),
+            'sm2SignWidget': ('ui.widgets.sm2_sign_widget', 'SM2SignWidget'),
             
             # 哈希算法
             'md5Widget': ('ui.widgets.md5_widget', 'MD5Widget'),
