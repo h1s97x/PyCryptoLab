@@ -121,6 +121,9 @@ class FluentMainWindow(FluentWindow):
                 {'icon': FIF.FINGERPRINT, 'name': 'SPECK', 'description': 'NSA轻量级分组密码', 'objectName': 'speckWidget'},
                 {'icon': FIF.FINGERPRINT, 'name': 'SIMON', 'description': 'NSA轻量级分组密码', 'objectName': 'simonWidget'},
                 {'icon': FIF.FINGERPRINT, 'name': 'Block Mode', 'description': 'ECB和CBC分组模式', 'objectName': 'blockModeWidget'},
+                {'icon': FIF.FINGERPRINT, 'name': 'SEAL', 'description': 'IBM伪随机生成算法', 'objectName': 'sealWidget'},
+                {'icon': FIF.FINGERPRINT, 'name': 'ZUC', 'description': '国密流密码算法（LTE标准）', 'objectName': 'zucWidget'},
+                {'icon': FIF.FINGERPRINT, 'name': 'Crypto-1', 'description': 'MIFARE RFID加密算法', 'objectName': 'crypto1Widget'},
             ],
             self
         )
@@ -230,6 +233,9 @@ class FluentMainWindow(FluentWindow):
             'speckWidget': ('ui.widgets.speck_widget', 'SPECKWidget'),
             'simonWidget': ('ui.widgets.simon_widget', 'SIMONWidget'),
             'blockModeWidget': ('ui.widgets.block_mode_widget', 'BlockModeWidget'),
+            'sealWidget': ('ui.widgets.seal_widget', 'SEALWidget'),
+            'zucWidget': ('ui.widgets.zuc_widget', 'ZUCWidget'),
+            'crypto1Widget': ('ui.widgets.crypto1_widget', 'Crypto1Widget'),
             
             # 公钥密码
             'rsaWidget': ('ui.widgets.rsa_widget', 'RSAWidget'),
