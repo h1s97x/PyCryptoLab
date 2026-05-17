@@ -44,7 +44,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install gmssl
-          pip install pytest pytest-cov gmssl
+          pip install pytest pytest-cov gmssl numpy
 
       - name: Run unit tests with coverage
         run: |
